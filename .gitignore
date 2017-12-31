@@ -3,3 +3,5 @@ node_modules/
 phantomjs/
 .DS_Store
 */.DS_Store
+screenshots/*
+
