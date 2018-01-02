@@ -129,7 +129,7 @@ require('http').createServer(async (req, res) => {
           await page.click(INBOX_SELECTOR);
           await page.click(CHANGE_LIST_SELECTOR);
           await page.keyboard.type(t);
-          :await page.keyboard.press('Enter');
+          await page.keyboard.press('Enter');
           console.log('task '+ t +' added')
           return;
         } else{
