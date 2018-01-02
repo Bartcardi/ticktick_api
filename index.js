@@ -76,8 +76,13 @@ require('http').createServer(async (req, res) => {
   }
 
   if (reqUrl == '/get_lists'){
-    const LISTS_SELECTOR = '#project-view-area > div.project-list.list-group.l-tab-pane-0.t-active';
-    const html = await page.evaluate(LISTS_SELECTOR => document.getElementById(LISTS_SELECTOR).innerHTML);
+    const html = await page.evaluate(() => {
+      const FOLDER_SELECTOR = '#project-ul > li > div > div > a > span.l-title.group-title.project-title';
+      var thtml = {};
+      elem = document.querySelectorAll(FOLDER_SELECTOR);
+      elem.forEach(e => console.log(e.innerHTML));
+      return thtml;
+    });
     console.log(html);
     res.writeHead(200, {
       'content-type': 'application/json',
@@ -118,9 +123,13 @@ require('http').createServer(async (req, res) => {
           //await page.waitFor(1000);
           const CHANGE_LIST_SELECTOR = '#add-task > div.preset.tl-q-preset > div.preset-list.dropdown > a > svg';
           await page.click(CHANGE_LIST_SELECTOR);
-          await page.screenshot({ path: 'screenshots/ticktick_clicked_add_task_.png'});
-          //await page.keyboard.type(t);
-          //await page.keyboard.press('Enter');
+          //await page.screenshot({ path: 'screenshots/ticktick_clicked_add_task_.png'});
+          const INBOX_SELECTOR = '#add-task > div.preset.tl-q-preset > div.preset-list.dropdown.open > div > div > ul > li.active > a'
+          await page.waitForSelector(INBOX_SELECTOR);
+          await page.click(INBOX_SELECTOR);
+          await page.click(CHANGE_LIST_SELECTOR);
+          await page.keyboard.type(t);
+          :await page.keyboard.press('Enter');
           console.log('task '+ t +' added')
           return;
         } else{

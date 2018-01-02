@@ -28,7 +28,7 @@ module.exports = {
 ```shell
 yarn start
 ```
-Then do an HTTP request to `localhost:3000/login` to login to TickTick. To add a task to your inbox perform a JSON POST request to localhost:3000/add_task with body:
+Then do an HTTP request to `localhost:3000/login` to login to TickTick. To add a task to your inbox perform a JSON POST request to `localhost:3000/add_task` with body:
 
 ```json
 {
